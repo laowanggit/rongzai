@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/public/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/plugins/layer/layer.js"></script>
+    <script>
+        $(function(){
+            //layer.alert('见到你真的很高兴', {icon: 6});
+            // layer.msg('你确定你很帅么？', {
+            //     time: 0 //不自动关闭
+            //     ,btn: ['必须啊', '丑到爆']
+            //     ,yes: function(index){
+            //         layer.close(index);
+            //         layer.msg('有眼光');
+            //     }
+            // });
+            // layer.confirm('亲，确定删除嘛？', {
+            //     btn: ['确定','取消'] //按钮
+            // }, function(){
+            //     layer.msg('删除中', {icon: 1});
+            //
+            // }, function(){
+            //     layer.msg('也可以这样', {
+            //         time: 2000, //2s后自动关闭
+            //         btn: ['明白了', '知道了']
+            //     });
+            // });
+
+            //页面层
+
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: 'html内容'
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+
+
+
+</body>
+</html>

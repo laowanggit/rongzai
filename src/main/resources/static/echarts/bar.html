@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/public/libs/jquery.min.js"></script>
+    <script src="/public/plugins/echarts/echarts.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //1,初始化echarts
+            var myEcharts = echarts.init(document.getElementById("myBarContainner"));
+            //2,初始化配置和数据
+            var  option = {
+                title : {
+                    text: '千锋集团各部门男女员工统计',
+                    subtext: '2019年4统计月'
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['男','女']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        //data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        data:[]
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'男',
+                        type:'bar',
+                        //data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                        data:[],
+                        markLine : {
+                            data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+                    },
+                    {
+                        name:'女',
+                        type:'bar',
+                        //data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                        data:[],
+                        // markPoint : {
+                        //     data : [
+                        //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                        //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                        //     ]
+                        // },
+                        markLine : {
+                            data : [
+                                {type : 'average', name : '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+
+            $.ajax({
+                url:"/sys/echarts/bar",
+                dataType:"json",
+                success:function(r){
+                    option.xAxis[0].data = r.xAxisData;
+                    option.series[0].data = r.series0Data;
+                    option.series[1].data = r.series1Data;
+
+                    //3.设置option 渲染图片
+                    myEcharts.setOption(option);
+                }
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+
+<div style="height: 500px;width: 600px" id="myBarContainner"></div>
+
+</body>
+</html>
